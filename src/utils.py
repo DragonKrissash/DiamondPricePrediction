@@ -26,3 +26,12 @@ def eval_model(Xtr,ytr,Xte,yte,models):
         model_report[list(models.keys())[i]]=r2
         
     return model_report
+
+def load_object(file_path):
+    try:
+        
+        with open(file_path,'rb') as f:
+            return pickle.load(f)
+    except Exception as e:
+        logging.info('Error occured in loading pickle',e)
+        raise CustomException(e,sys)
