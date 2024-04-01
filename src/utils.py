@@ -15,3 +15,14 @@ def save_obj(file_path,obj):
             pickle.dump(obj,f)
     except Exception as e:
         raise CustomException(e,sys)
+    
+def eval_model(Xtr,ytr,Xte,yte,models):
+    model_report={}
+    for i in range(len(models)):
+        model=list(models.values())[i]
+        model.fit(Xtr,ytr)
+        y_pred=model.predict(Xte)
+        r2=r2_score(y_pred,yte)
+        model_report[list(models.keys())[i]]=r2
+        
+    return model_report
